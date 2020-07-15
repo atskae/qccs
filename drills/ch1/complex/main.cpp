@@ -3,6 +3,9 @@
 
 #include "ComplexNum.hpp"
 
+#define FLOAT_DIFF 1e-5
+#define FLOAT_EQUAL(a, b) ((a-b) < FLOAT_DIFF)
+
 int main() {
     
     std::cout << "Addition: ";
@@ -48,6 +51,58 @@ int main() {
         ComplexNum z(0, 0);
         assert(a+b-z == a+b);
         assert(z-z == z);
+    }
+    std::cout << "passed" << std::endl;
+
+    std::cout << "Division: ";
+    {
+        ComplexNum a(-2, 1);
+        ComplexNum b(1, 2);
+        
+        ComplexNum c = a/b;
+        assert(c == ComplexNum(0,1));
+
+        ComplexNum id(1, 0); // identity
+        assert(a/id == a && b/id == b);
+        assert((a+b-c)/id == (a+b-c+ComplexNum(0,0)));
+       
+        // Not sure how to test with fractions...
+    }
+    std::cout << "passed" << std::endl;
+
+    std::cout << "Conjugate: ";
+    {
+        ComplexNum a(-7, 4);
+        ComplexNum b(8, -14);
+    
+        ComplexNum ac = a.getConjugate();
+        ComplexNum bc = b.getConjugate();
+
+        assert(ac == ComplexNum(-7, -4));
+        assert(bc == ComplexNum(8, 14));
+
+        assert(ac * bc == (a*b).getConjugate());
+        
+        // multiplying by (-1,0) flips the sign of both the real and imaginary parts
+        assert(a * ComplexNum(-1, 0) == ComplexNum(7, -4));
+        assert(b * ComplexNum(-1, 0) == ComplexNum(-8, 14));
+        
+        assert(ac + bc == (a+b).getConjugate());
+        
+        // modulus squared
+        ComplexNum d(3, 4);
+        assert(d * d.getConjugate() == ComplexNum(25, 0));
+    }
+    std::cout << "passed" << std::endl;
+
+    std::cout << "Modulus: ";
+    {
+        ComplexNum a(3, 4);
+        assert(FLOAT_EQUAL(a.getModulus(), 5.0));
+
+        ComplexNum b(7, -8);
+        assert(FLOAT_EQUAL(b.getModulus(), 10.63014));
+        assert(FLOAT_EQUAL(b.getModulus(), (b*ComplexNum(-1,0)).getModulus()));
     }
     std::cout << "passed" << std::endl;
 

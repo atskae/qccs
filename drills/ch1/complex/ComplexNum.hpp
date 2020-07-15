@@ -13,6 +13,8 @@
 #include <string>
 #include <ostream>
 
+#include <math.h> // sqrt()
+
 // Numbers that have the form a+bi, where a is the real part, b is the imaginary part, and i is the sqrt(-1)
 class ComplexNum {
     private:
@@ -42,7 +44,18 @@ class ComplexNum {
             return ComplexNum(_real - cn._real, _img - cn._img);
         }
 
-}; // class ComplexNumber
+        ComplexNum operator/(const ComplexNum& cn) {
+            int denom = (cn._real * cn._real) + (cn._img * cn._img);
+            int real = ((_real * cn._real) + (_img * cn._img)) / denom;
+            int img = ((cn._real * _img) - (_real * cn._img)) / denom;
+            return ComplexNum(real, img);
+        }
+
+        ComplexNum getConjugate() { return ComplexNum(_real, _img * -1); }
+        
+        double getModulus() { return sqrt(_real*_real + _img*_img); }
+
+}; // class ComplexNum
 
 std::ostream& operator<<(std::ostream& os, const ComplexNum& cn) {
     std::string op = "";
