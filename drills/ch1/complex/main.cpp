@@ -3,8 +3,9 @@
 
 #include "ComplexNum.hpp"
 
-#define FLOAT_DIFF 1e-5
-#define FLOAT_EQUAL(a, b) ((a-b) < FLOAT_DIFF)
+#define ABS(N) ((N < 0) ? (N*-1) : (N))
+#define FLOAT_DIFF 0.0001f 
+#define FLOAT_EQUAL(a, b) (ABS(a-b) < FLOAT_DIFF)
 
 int main() {
     
@@ -101,8 +102,20 @@ int main() {
         assert(FLOAT_EQUAL(a.getModulus(), 5.0));
 
         ComplexNum b(7, -8);
-        assert(FLOAT_EQUAL(b.getModulus(), 10.63014));
+        assert(FLOAT_EQUAL(b.getModulus(), 10.6301));
         assert(FLOAT_EQUAL(b.getModulus(), (b*ComplexNum(-1,0)).getModulus()));
+    }
+    std::cout << "passed" << std::endl;
+
+    std::cout << "Cartesian/Polar conversion: ";
+    {
+        ComplexNum a(1, 1);
+        std::cout << std::endl << a << std::endl;
+        std::cout << "Cartesian: " << a.getCartesianRep() << std::endl;
+        std::cout << "Polar: " << a.getPolarRep() << std::endl;
+
+        assert(FLOAT_EQUAL(a.getModulus(), sqrt(2)));
+        assert(FLOAT_EQUAL(a.getAngle(), M_PI/4));
     }
     std::cout << "passed" << std::endl;
 
