@@ -3,10 +3,6 @@
 
 #include "ComplexNum.hpp"
 
-#define ABS(N) ((N < 0) ? (N*-1) : (N))
-#define FLOAT_DIFF 0.0001f 
-#define FLOAT_EQUAL(a, b) (ABS(a-b) < FLOAT_DIFF)
-
 int main() {
     
     std::cout << "Addition: ";
