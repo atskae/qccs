@@ -6,7 +6,6 @@
     ---
     2.1.1: Write three functions that perform the addition, inverse, and scalar multiplication operations for C^n,
             i.e., write a function that accepts the appropriate input for each of the operations and outputs the vector.
-    
 */
 
 #include <iostream>
