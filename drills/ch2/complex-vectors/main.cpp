@@ -23,6 +23,7 @@ int main() {
         // multiply by scalar
         assert(sum * ComplexNum(0,0) == z);
         assert(sum + (sum*ComplexNum(-1,0)) == z); // additive inverse
+        assert(sum + (sum.getAdditiveInverse()) == z); // additive inverse
 
         cv = {ComplexNum(6,3), ComplexNum(0,0), ComplexNum(5,1), ComplexNum(4,0)};
         ComplexVector<4> scalarMult = {ComplexNum(12, 21), ComplexNum(0,0), ComplexNum(13,13), ComplexNum(12, 8)};

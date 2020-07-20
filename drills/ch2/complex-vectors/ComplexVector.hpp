@@ -74,6 +74,9 @@ class ComplexVector {
             return p;
         }
 
+        // Additive inverse
+        ComplexVector getAdditiveInverse() const { return (*this) * ComplexNum(-1, 0); }
+
 }; // Complex Vector<Dim>
 
 #endif // QCCS_COMPLEX_VECTOR_H
